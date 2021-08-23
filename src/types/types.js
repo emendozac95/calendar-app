@@ -5,5 +5,6 @@ export const types = {
     calendarAddNew: '[calendar] Add new event to calendar',
     calendarDelete: '[calendar] Delete calendar event',
     calendarSetActive: '[calendar] Set event to active',
-    calendarUnsetActive: '[calendar] Unset the active event'
+    calendarUnsetActive: '[calendar] Unset the active event',
+    calendarUpdate: '[calendar] Event update'
 }

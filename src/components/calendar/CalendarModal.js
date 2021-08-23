@@ -7,7 +7,7 @@ import DateTimePicker from 'react-datetime-picker';
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from "sweetalert2";
-import { calendarAddNew, calendarUnsetActive } from '../../actions/calendar';
+import { calendarAddNew, calendarUnsetActive, calendarUpdated } from '../../actions/calendar';
 import { useEffect } from 'react';
 
 
@@ -51,8 +51,7 @@ export const CalendarModal = () => {
 
     const [dateStart, setDateStart] = useState( now.toDate() );
     const [dateEnd, setDateEnd] = useState( nowPlus1.toDate() );
-    const [titleValid, setTitleValid] = useState(true)
-
+    const [titleValid, setTitleValid] = useState(true);
     const [formValues, setFormValues] = useState( initEvent );
 
     const { notes, title, start, end } = formValues;
@@ -60,6 +59,8 @@ export const CalendarModal = () => {
     useEffect(() => {
         if( active ){
             setFormValues( active );
+        }else{
+            setFormValues( initEvent );
         }
     }, [ active, setFormValues ])
 
@@ -100,14 +101,19 @@ export const CalendarModal = () => {
         }else{
             setTitleValid( true );
         }
-        
-        dispatch( calendarAddNew({
-            ...formValues,
-            id: new Date().getTime(),
-            user: {
-                name: 'Mauricio'
-            }
-        }) );
+
+        if( active ){
+            dispatch( calendarUpdated( formValues ) );
+        }else{
+            dispatch( calendarAddNew({
+                ...formValues,
+                id: new Date().getTime(),
+                user: {
+                    name: 'Mauricio'
+                }
+            }) );
+            console.log( 'Se agregó nuevo evento' );
+        }
         handleCloseModal();
     }
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { calendarSetActive } from '../../actions/calendar';
 import { uiOpenModal } from '../../actions/modal';
 
 export const AddNewFab = () => {

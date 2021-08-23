@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { uiOpenModal } from '../../actions/modal';
 import { calendarSetActive } from '../../actions/calendar';
 import { AddNewFab } from '../ui/AddNewFab';
+import { DeleteEventFab } from '../ui/DeleteEventFab';
 
 moment.locale( 'es' );
 
@@ -20,7 +21,7 @@ const localizer = momentLocalizer( moment );
 
 export const CalendarScreen = () => {
 
-    const { events } = useSelector( data => data.calendar);
+    const { events, active } = useSelector( data => data.calendar);
 
     const dispatch = useDispatch();
 
@@ -74,6 +75,7 @@ export const CalendarScreen = () => {
             />
 
             <AddNewFab />
+            { active && <DeleteEventFab /> }
 
             <CalendarModal />
         </div>
